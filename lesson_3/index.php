@@ -32,8 +32,10 @@ echo $result . '<br><br>';
 //
 /*------------ task - 3 ------------*/
 $age = '35';
+$str = 'Мне много лет';
+$strReplaced = str_replace('много', $age, $str);
 
-echo 'Мне '. $age . ' лет<br><br>';
+echo $strReplaced . '<br><br>';
 /*----------------------------------*/
 //
 //

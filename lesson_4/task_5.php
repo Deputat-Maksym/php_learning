@@ -16,11 +16,13 @@ $array = array(
                 'age'=>'20',
                 'gender'=>'g',
                 'login'=>'Катя'),
-            'a4' => array('id'=>'4',
+            'a4' => array(
+            	'id'=>'4',
                 'age'=>'20',
                 'gender'=>'m',
                 'login'=>'Стас'),
-            'a5' => array('id'=>'5',
+            'a5' => array(
+            	'id'=>'5',
                 'age'=>'12',
                 'gender'=>'g',
                 'login'=>'Маша'),
@@ -46,7 +48,44 @@ $array = array(
                 'login'=>'Даша'),
     );
 
+$age = array_column($array, 'age');
+$gender = array_column($array, 'gender');
 
-array_multisort($array, SORT_ASC);
+array_multisort($age, SORT_ASC, $gender,SORT_DESC, $array);
+?>
 
-//var_dump($array);
+<table>
+	<thead>
+		<td>id</td>
+		<td>age</td>
+		<td>gender</td>
+		<td>login</td>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td>
+			<?php
+				foreach ($array as $key) {
+					print('<tr>');
+
+					foreach ($key as $val) {
+						printf('<td>%s</td>', $val);
+					}
+
+					print('</tr>');
+				}
+			?>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<style>
+	thead {
+		font-weight: bold;
+	}
+	td {
+		padding: 0 10px;
+	}
+</style>

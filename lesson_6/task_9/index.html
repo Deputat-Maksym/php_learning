@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    
+    <style>
+        .wrap {
+            width: 320px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 30px;
+            color: #55e;
+        }
+        
+        label span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            display: block;
+            width: 100%;
+            padding: 5px 10px;
+            border: 1px solid #c8c2c2;
+            border-radius: 3px;
+            color: gray;
+            font-size: 1.5rem;
+            box-sizing: border-box;
+        }
+        
+        button  {
+            outline: none;
+            border: none;
+            border: 3px solid #55e;
+            border-radius: 8px;
+            text-transform: uppercase;
+            color: #55e;
+            background: none;
+            font-size: 1.2rem;
+            padding: 10px;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <h1>Calculator</h1>
+    <form action="task_9.1.php" method="get">
+        <label>
+            <span>Input number 1</span>
+            <input type="number" name="num-first" required>
+        </label>
+        <label>
+            <span>Input number 2</span>
+            <input type="number" name="num-second" required>
+        </label>
+        <label>
+            <span>Choose an operation</span>
+<!--            <input type="text" name="str" required>-->
+            <select name="operation" required>
+                <option value="add">Addition +</option>
+                <option value="subtract">Subtraction -</option>
+                <option value="multiply">Multiplication *</option>
+                <option value="divide">Division /</option>
+            </select>
+        </label>
+        <button type="submit">Get Result</button>
+    </form>
+    
+</div>
+
+</body>
+</html>

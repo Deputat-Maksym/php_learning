@@ -73,13 +73,15 @@
             <?php
                 if ($_COOKIE['visit']) {
                     echo '<p style="margin: 0 0 50px">You have visited this page - ' . $_COOKIE['visit'] . ' times</p>';
+                } else {
+					echo '<p style="margin: 0 0 50px">You have visited this page - 1 times</p>';
                 }
             ?>
 
             <form action="index.php" method="get">
                 <label>
-                    <span>Nick</span>
-                    <input type="text" name="name" value="<?php if ($_COOKIE['name']) { echo $_COOKIE['name'];} ?>" required>
+                    <span>Username</span>
+                    <input type="text" name="name" value="<?php if ($_GET['name']) {echo $_GET['name'];} else {echo $_COOKIE['name'];} ?>" required>
                 </label>
                 <button type="submit">Login</button>
             </form>

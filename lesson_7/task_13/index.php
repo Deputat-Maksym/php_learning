@@ -1,17 +1,30 @@
 <?php
 
-//    if ($_COOKIE['visit']) {
-//        $counter = +$_COOKIE['visit'] += 1;
-//        setcookie('visit', $counter);
-//    }
-//
-//    if ($_GET['name']) {
-//        setcookie('name', $_GET['name']);
-//    }
+    session_start();
 
-session_start();
+    $name = $_GET['name'] ?? null;
+    $nick = $_GET['nick'] ?? null;
+    $email = $_GET['email'] ?? null;
+    $password = $_GET['password'] ?? null;
 
+    if ($name) {
+        $_SESSION['name'] = $name;
+    }
+    if ($nick) {
+        $_SESSION['nick'] = $nick;
+    }
+    if ($email) {
+        $_SESSION['email'] = $email;
+    }
+    if ($password) {
+        $_SESSION['password'] = $password;
+    }
+
+
+    var_dump($_SESSION);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,16 +93,14 @@ session_start();
         <div class="wrap">
 
             <?php
-//                if ($_COOKIE['visit']) {
-//                    echo '<p style="margin: 0 0 50px">You have visited this page - ' . $_COOKIE['visit'] . ' times</p>';
-//                } else {
-//					echo '<p style="margin: 0 0 50px">You have visited this page - 1 times</p>';
-//                }
+                if ($name && $nick && $email && $password) {
+                    echo '<p style="margin: 0 0 50px; font-size: 1.5rem">You are registered</p>';
+                }
             ?>
 
-            <form action="" method="get">
+            <form action="profile.php" method="get">
                 <label>
-                    <span>Username</span>
+                    <span>Nickname or login</span>
                     <input type="text" name="name" value="" required>
                 </label>
                 <label>

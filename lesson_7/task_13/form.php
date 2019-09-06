@@ -12,6 +12,7 @@
 //        setcookie('name', $_GET['name']);
 //    }
 
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -91,11 +92,11 @@
             <form action="index.php" method="get">
                 <label>
                     <span>Username</span>
-                    <input type="text" name="name" value="" required>
+                    <input type="text" name="name" value="" pattern="[a-zA-Z][a-zA-Z0-9-_\.]{5,20}$" required>
                 </label>
                 <label>
                     <span>Nickname</span>
-                    <input type="text" name="nick" value="" required>
+                    <input type="text" name="nick" value="" pattern="[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$" required>
                 </label>
                 <label>
                     <span>E-mail</span>

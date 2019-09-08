@@ -1,18 +1,7 @@
 <?php
 
-//    setcookie('visit', '1');
-//
-//
-//    if ($_COOKIE['visit']) {
-//        $counter = +$_COOKIE['visit'] += 1;
-//        setcookie('visit', $counter);
-//    }
-//
-//    if ($_GET['name']) {
-//        setcookie('name', $_GET['name']);
-//    }
-
     session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -93,14 +82,6 @@
     <body>
 
         <div class="wrap">
-
-            <?php
-//                if ($_COOKIE['visit']) {
-//                    echo '<p style="margin: 0 0 50px">You have visited this page - ' . $_COOKIE['visit'] . ' times</p>';
-//                } else {
-//					echo '<p style="margin: 0 0 50px">You have visited this page - 1 times</p>';
-//                }
-            ?>
 
             <form action="index.php" method="get">
                 <label>

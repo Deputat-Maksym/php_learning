@@ -1,11 +1,15 @@
 <?php
 
-    setcookie('visit', '1');
+
+//    setcookie('visit', '1');
 
 
     if ($_COOKIE['visit']) {
-        $counter = +$_COOKIE['visit'] += 1;
+        $counter = $_COOKIE['visit'] += 1;
         setcookie('visit', $counter);
+    } else {
+        // Значення "1" встановлюється один раз лише, якщо НЕ задано $_COOKIE['visit']
+		setcookie('visit', '1');
     }
 
     if ($_GET['name']) {

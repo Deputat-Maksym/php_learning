@@ -86,6 +86,19 @@
         a:hover {
             text-decoration: none;
         }
+
+        .show-pass {
+            display: flex;
+        }
+
+        .show-pass input {
+            width: unset;
+            margin-right: 10px;
+        }
+
+        .show-pass span {
+            margin: 0;
+        }
     </style>
 </head>
     <body>
@@ -99,19 +112,42 @@
             ?>
 
             <form action="profile.php" method="get">
+                <input type="text" name="login-form" value="true" style="display: none">
                 <label>
-                    <span>Nickname or login</span>
-                    <input type="text" name="name" value="" required>
+                    <span>Nickname or E-mail</span>
+                    <input type="text" name="name" value="<?php echo $nick ?>" required>
                 </label>
                 <label>
                     <span>Password</span>
-                    <input type="password" name="password" value="" min="6" required>
+                    <input type="password" name="password" id="password" value="<?php echo $password ?>" min="6" required>
+                </label>
+                <label class="show-pass">
+                    <input type="checkbox" onclick="checkClick()">
+                    <span>Show password</span>
                 </label>
                 <a href="form.php">Registration</a>
                 <button type="submit">Login</button>
             </form>
 
         </div>
+
+        <script>
+
+            'use strict';
+
+            var passInput = document.querySelector('#password'),
+                checkInput = document.querySelector('.show-pass input');
+
+            console.log(passInput);
+            function checkClick() {
+              if(checkInput.checked) {
+                passInput.setAttribute('type', 'text')
+              } else {
+                passInput.setAttribute('type', 'password')
+              }
+            }
+
+        </script>
 
     </body>
 </html>

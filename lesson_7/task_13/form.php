@@ -75,6 +75,19 @@
         a:hover {
             text-decoration: none;
         }
+
+        .show-pass {
+            display: flex;
+        }
+
+        .show-pass input {
+            width: unset;
+            margin-right: 10px;
+        }
+
+        .show-pass span {
+            margin: 0;
+        }
     </style>
 </head>
     <body>
@@ -92,11 +105,11 @@
             <form action="index.php" method="get">
                 <label>
                     <span>Username</span>
-                    <input type="text" name="name" value="" pattern="[a-zA-Z][a-zA-Z0-9-_\.]{5,20}$" required>
+                    <input type="text" name="name" value="" pattern="[a-zA-Z-Яа-я][a-zA-Z-Яа-я0-9-_\.]{5,20}$" required>
                 </label>
                 <label>
                     <span>Nickname</span>
-                    <input type="text" name="nick" value="" pattern="[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$" required>
+                    <input type="text" name="nick" value="" pattern="[a-zA-Z-Яа-я][a-zA-Z-Яа-я0-9-_\.]{3,20}$" required>
                 </label>
                 <label>
                     <span>E-mail</span>
@@ -104,13 +117,35 @@
                 </label>
                 <label>
                     <span>Password</span>
-                    <input type="password" name="password" value="" min="6" required>
+                    <input type="password" name="password" id="password" value="" min="6" pattern="[0-9]{6,20}$" required>
+                </label>
+                <label class="show-pass">
+                    <input type="checkbox" onclick="checkClick()">
+                    <span>Show password</span>
                 </label>
                 <a href="index.php">Login</a>
                 <button type="submit">Registretion</button>
             </form>
 
         </div>
+
+        <script>
+
+          'use strict';
+
+          var passInput = document.querySelector('#password'),
+              checkInput = document.querySelector('.show-pass input');
+
+          console.log(passInput);
+          function checkClick() {
+            if(checkInput.checked) {
+              passInput.setAttribute('type', 'text')
+            } else {
+              passInput.setAttribute('type', 'password')
+            }
+          }
+
+        </script>
 
     </body>
 </html>

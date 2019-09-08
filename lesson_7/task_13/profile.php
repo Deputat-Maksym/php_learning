@@ -3,38 +3,55 @@ session_start();
 
     $name = $_GET['name'] ?? null;
     $email = $_GET['email'] ?? null;
+    $nick = $_GET['nick'] ?? null;
     $password = $_GET['password'] ?? null;
 
+    if($_GET['login-form'] !== 'true') {
+		if ($name) {
+			$_SESSION['name'] = $name;
+		}
+		if ($nick) {
+			$_SESSION['nick'] = $nick;
+		}
+		if ($email) {
+			$_SESSION['email'] = $email;
+		}
+		if ($password) {
+			$_SESSION['password'] = $password;
+		}
+    }
+
     var_dump($_SESSION);
-//function showFilterRes($arr, $tableHeader) {
-//	print('<div style="font-weight: bold; margin-bottom: 5px">' . $tableHeader . '</div>');
-//
-//	print('
-//		<table style="padding: 0 0 45px 0">
-//			<thead style="font-weight: bold">
-//				<td style="padding: 0 10px">Name</td>
-//				<td style="padding: 0 10px">Salery</td>
-//				<td style="padding: 0 10px">Work hours</td>
-//			</thead>
-//
-//			<tbody>
-//	');
-//
-//	foreach ($arr as $key) {
-//		print('<tr>');
-//
-//		foreach ($key as $val) {
-//			printf('<td style="padding: 0 10px">%s</td>', $val);
-//		}
-//
-//		print('</tr>');
-//	};
-//
-//	print('
-//			</tbody>
-//		</table>
-//	');
-//};
+
+
+    function showForm() {
+        return '<form action="profile.php" method="get">
+                    <label>
+                        <span>Username</span>
+                        <input type="text" name="name" value="' . $_SESSION['name'] . '" pattern="[a-zA-Z-Яа-я][a-zA-Z-Яа-я0-9-_\.]{5,20}$" disabled required>
+                    </label>
+                    <label>
+                        <span>Nickname</span>
+                        <input type="text" name="nick" value="' . $_SESSION['nick'] . '" pattern="[a-zA-Z-Яа-я][a-zA-Z-Яа-я0-9-_\.]{3,20}" disabled required>
+                    </label>
+                    <label>
+                        <span>E-mail</span>
+                        <input type="email" name="email" value="' . $_SESSION['email'] . '" disabled required>
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        <input type="password" name="password" id="password" value="' . $_SESSION['password'] . '" min="6" disabled required>
+                    </label>
+                    <label class="show-pass">
+                        <input type="checkbox" onclick="checkClick()">
+                        <span>Show password</span>
+                    </label>
+                    <div style="display: flex; justify-content: space-between">
+                        <button type="button" class="submit-btn" onclick="activationForm()">Edit profile</button>
+                        <button type="submit" class="disabled">Save</button>
+                    </div>
+                </form>';
+    };
 
 ?>
 
@@ -89,6 +106,12 @@ session_start();
             display: block;
         }
 
+        .disabled {
+            pointer-events: none;
+            color: gray;
+            border: 3px solid gray;
+        }
+
         a {
             font-size: 1.2rem;
             margin-bottom: 25px;
@@ -98,6 +121,19 @@ session_start();
         a:hover {
             text-decoration: none;
         }
+
+        .show-pass {
+            display: flex;
+        }
+
+        .show-pass input {
+            width: unset;
+            margin-right: 10px;
+        }
+
+        .show-pass span {
+            margin: 0;
+        }
     </style>
 </head>
     <body>
@@ -106,37 +142,54 @@ session_start();
 
             <?php
 
-                if ($password === $_SESSION['password'] && $name === $_SESSION['nick'] || $name === $_SESSION['email']) {
+                if($_GET['login-form'] === 'true') {
+                    if ($password === $_SESSION['password'] && $name === $_SESSION['nick']) {
 
-                    echo '<form action="index.php" method="get">
-                            <label>
-                                <span>Username</span>
-                                <input type="text" name="name" value="" pattern="[a-zA-Z][a-zA-Z0-9-_\.]{5,20}$" required>
-                            </label>
-                            <label>
-                                <span>Nickname</span>
-                                <input type="text" name="nick" value="" pattern="[a-zA-Z][a-zA-Z0-9-_\.]{3,20}$" required>
-                            </label>
-                            <label>
-                                <span>E-mail</span>
-                                <input type="email" name="email" value="" required>
-                            </label>
-                            <label>
-                                <span>Password</span>
-                                <input type="password" name="password" value="" min="6" required>
-                            </label>
-                            <button type="submit">Edit profile</button>
-                            <button type="submit">Save</button>
-                          </form>';
+                        echo showForm();
 
-            } else {
+                    } elseif ($password === $_SESSION['password'] && $name === $_SESSION['email']) {
 
-                echo '<p style="margin: 0 0 50px; font-size: 1.5rem">Login or password is not valid</p>';
+                        echo showForm();
 
-            }
+                    } else {
+
+                        echo '<p style="margin: 0 0 50px; font-size: 1.5rem">Login or password is not valid</p><a href="index.php">Return to Login form</a>';
+
+                    }
+                } else {
+					echo '<p style="margin: 0 0 50px; font-size: 1.5rem">Your changes are saved!</p>';
+                    echo showForm();
+                }
 
             ?>
         </div>
+
+        <script>
+
+          'use strict';
+
+          var passInput = document.querySelector('#password'),
+              checkInput = document.querySelector('.show-pass input'),
+              submitBtn = document.querySelector('.submit-btn'),
+              inputsAll = document.querySelectorAll('input');
+
+          function checkClick() {
+            if(checkInput.checked) {
+              passInput.setAttribute('type', 'text')
+            } else {
+              passInput.setAttribute('type', 'password')
+            }
+          }
+
+          function activationForm() {
+            document.querySelector('button[type="submit"]').classList.remove('disabled');
+
+            for(var i = 0; i < inputsAll.length; i++) {
+              inputsAll[i].removeAttribute('disabled');
+            }
+          }
+
+        </script>
 
     </body>
 </html>

@@ -1,21 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Deputat
- * Date: 24.09.2019
- * Time: 14:44
- */
 
-class AirFreight
+require_once 'Transport.php';
+require_once 'Loading.php';
+require_once 'UnLoading.php';
+require_once 'UnLoadingAll.php';
+require_once 'HowMuchEmpty.php';
+
+
+class AirFreight extends Transport
 {
-    //max корисне навантаження транспорту
-    private $totalMaxAmount;
+    use Loading, HowMuchEmpty, UnLoading, UnLoadingAll;
 
-    //поточне завантаження транспорту вантажем
-    private static $currentAmount;
-
-    public function __construct($totalMaxAmount)
-    {
-        $this->totalMaxAmount = $totalMaxAmount;
-    }
+    private $typeTransport = 'cargo';
 }

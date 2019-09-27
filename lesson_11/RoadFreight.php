@@ -1,12 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Deputat
- * Date: 24.09.2019
- * Time: 14:50
- */
 
-class RoadFreight
+require_once 'Transport.php';
+require_once 'Loading.php';
+require_once 'UnLoading.php';
+require_once 'UnLoadingAll.php';
+require_once 'HowMuchEmpty.php';
+
+
+class RoadFreight extends Transport
 {
+    use Loading, HowMuchEmpty, UnLoading, UnLoadingAll;
 
+    private $typeTransport = 'cargo';
 }

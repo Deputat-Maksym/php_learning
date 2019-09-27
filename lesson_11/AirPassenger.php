@@ -3,14 +3,12 @@
 require_once 'Transport.php';
 require_once 'Loading.php';
 require_once 'UnLoading.php';
+require_once 'UnLoadingAll.php';
 require_once 'HowMuchEmpty.php';
 
 class AirPassenger extends Transport
 {
-    use Loading, HowMuchEmpty, UnLoading;
+    use Loading, HowMuchEmpty, UnLoading, UnLoadingAll;
 
-//    public function __construct($totalMaxAmount)
-//    {
-//        parent::__construct($totalMaxAmount);
-//    }
+    private $typeTransport = 'passengers';
 }

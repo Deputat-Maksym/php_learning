@@ -5,7 +5,7 @@ require_once 'csv/Write.php';
 
 
 if($_GET['name'] && $_GET['date']) {
-    $csvWrite = new Write();
+    $csvWrite = new Write('data.csv');
 }
 
 

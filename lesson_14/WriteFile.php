@@ -3,5 +3,5 @@
 
 interface WriteFile
 {
-    public function writeData($writeData);
+    public function writeData(array $writeData);
 }

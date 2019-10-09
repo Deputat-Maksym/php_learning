@@ -1,12 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Deputat
- * Date: 08.10.2019
- * Time: 16:16
- */
 
-class Write
+require_once 'WriteFile.php';
+
+class Write implements WriteFile
 {
+    private $fileName = null;
 
+    public function writeData($writeData)
+    {
+        if(file_exists($this->fileName)) {
+            return $handle = fopen($this->fileName, 'r');
+        } else {
+            return false;
+        }
+    }
 }

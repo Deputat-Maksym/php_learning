@@ -3,15 +3,16 @@
 require_once 'csv/Read.php';
 require_once 'csv/Write.php';
 
-//    $name = $_GET['name'] ?? null;
-//    $date = $_GET['date'] ?? null;
-//
-//    if ($name) {
-//
-//    }
-//    if ($date) {
-//
-//    }
+
+if($_GET['name'] && $_GET['date']) {
+    $csvWrite = new Write();
+}
+
+
+//var_dump($_GET['name']);
+
+$csvRead = new Read('data.csv');
+$getData = $csvRead->readData();
 
 //function, that show data from file
 function showFileData($input) {
@@ -28,9 +29,6 @@ function showFileData($input) {
     }
     print('</tbody></table>');
 }
-
-$csvRead = new Read('data.csv');
-$getData = $csvRead->readData();
 
 ?>
 
@@ -130,19 +128,21 @@ $getData = $csvRead->readData();
             <?php
                 if($getData) {
                     showFileData($getData);
+                } else {
+                    echo 'File is not exist';
                 }
 
             ?>
 
 
-            <form action="profile.php" method="get">
+            <form action="index.php" method="get">
                 <label>
                     <span>Name</span>
                     <input type="text" name="name" required>
                 </label>
                 <label>
                     <span>Date of birth</span>
-                    <input type="text" name="date" placeholder="01.01.2000" required>
+                    <input type="date" name="date" required>
                 </label>
                 <button type="submit">Add data</button>
             </form>

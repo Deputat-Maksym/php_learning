@@ -1,6 +1,5 @@
 <?php
 
-require_once 'ReadFile.php';
 
 class Read implements ReadFile
 {
@@ -14,7 +13,15 @@ class Read implements ReadFile
     public function readData()
     {
         if(file_exists($this->fileName)) {
-            return $handle = fopen($this->fileName, 'r');
+            $handle = fopen($this->fileName, 'r');
+            $fileData = [];
+
+            while(($data = fgetcsv($handle, 1000, ';')) !== false) {
+                array_push($fileData, $data);
+            }
+
+            fclose($handle);
+            return $fileData;
         } else {
             return false;
         }

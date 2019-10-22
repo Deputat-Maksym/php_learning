@@ -1,31 +1,36 @@
 <?php
 
+require_once 'ReadFile.php';
+require_once 'WriteFile.php';
 require_once 'csv/Read.php';
 require_once 'csv/Write.php';
 
 
-if($_GET['name'] && $_GET['date']) {
-    $csvWrite = new Write();
+if(array_key_exists('name', $_GET) && array_key_exists('date', $_GET)) {
+    $csvWrite = new Write('data.csv');
+    $csvWrite->writeData($_GET);
 }
-
-
-//var_dump($_GET['name']);
 
 $csvRead = new Read('data.csv');
 $getData = $csvRead->readData();
 
 //function, that show data from file
-function showFileData($input) {
+function showFileData(array $input) {
+    $inputArrayLength = count($input);
+    $counter = 0;
+
     print('<table><tbody>');
-    while(($data = fgetcsv($input, 1000, ';')) !== false) {
+    while($counter < $inputArrayLength) {
 
         print('<tr>');
 
-        foreach ($data as $val) {
+        foreach ($input[$counter] as $val) {
             printf('<td>%s</td>', $val);
         }
 
         print('</tr>');
+
+        $counter++;
     }
     print('</tbody></table>');
 }
@@ -71,7 +76,6 @@ function showFileData($input) {
 
         button  {
             outline: none;
-            border: none;
             border: 3px solid #55e;
             border-radius: 8px;
             text-transform: uppercase;
